@@ -7,4 +7,8 @@
     <color name="flag_pink">#A70D64</color>
     <color name="flag_turquoise">#138072</color>
     <color name="flag_purple">#6320A0</color>
+
+    <color name="onigiri_count_new_surface">#20372A</color>
+    <color name="onigiri_count_learn_surface">#40301C</color>
+    <color name="onigiri_count_review_surface">#1D304A</color>
 </resources>
