@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.core.content.res.getDrawableOrThrow
-import androidx.core.content.withStyledAttributes
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -58,8 +57,6 @@ class DeckAdapter(
     private val expandImage: Drawable
     private val collapseImage: Drawable
 
-    // intended to be `val` but was declared a `var` to allow initialization from the init {} block
-    private var selectableItemBackground: Int = 0
     private val endPadding: Int = context.resources.getDimension(CommonR.dimen.deck_picker_right_padding).toInt()
     private val startPadding: Int = context.resources.getDimension(R.dimen.deck_picker_left_padding).toInt()
 
@@ -150,18 +147,25 @@ class DeckAdapter(
             binding.deckExpander.isClickable = false
             binding.deckExpander.setOnClickListener(null)
         }
-        holder.binding.deckLayout.setBackgroundResource(rowCurrentDrawable)
-        // set a different background color for the current selected deck
-        if (node.isSelected) {
-            if (activityHasBackground) {
-                val background =
-                    holder.binding.deckLayout.background
-                        .mutate()
-                background.alpha = (255 * SELECTED_DECK_ALPHA_AGAINST_BACKGROUND).toInt()
-                holder.binding.deckLayout.background = background
-            }
+        // Use rounded, theme-aware deck cards unless a user background image is active.
+        if (activityHasBackground) {
+            holder.binding.deckLayout.setBackgroundResource(rowCurrentDrawable)
         } else {
-            holder.binding.deckLayout.setBackgroundResource(selectableItemBackground)
+            holder.binding.deckLayout.setBackgroundResource(
+                if (node.isSelected) {
+                    R.drawable.onigiri_deck_selected_background
+                } else {
+                    R.drawable.onigiri_deck_item_background
+                },
+            )
+        }
+        // Keep selected rows translucent over a user-provided background image.
+        if (node.isSelected && activityHasBackground) {
+            val background =
+                holder.binding.deckLayout.background
+                    .mutate()
+            background.alpha = (255 * SELECTED_DECK_ALPHA_AGAINST_BACKGROUND).toInt()
+            holder.binding.deckLayout.background = background
         }
         // Set deck name and colour. Filtered decks have their own colour
         binding.deckName.text = node.lastDeckNameComponent
@@ -256,9 +260,6 @@ class DeckAdapter(
         collapseImage = ta.getDrawableOrThrow(8)
         collapseImage.isAutoMirrored = true
         ta.recycle()
-        context.withStyledAttributes(attrs = intArrayOf(android.R.attr.selectableItemBackground)) {
-            selectableItemBackground = ta.getResourceId(0, 0)
-        }
     }
 }
 
