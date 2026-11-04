@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onigiri_header_eyebrow">나의 학습 공간</string>
+    <string name="onigiri_header_title">나의 덱</string>
+    <string name="onigiri_header_subtitle">덱을 선택해 오늘의 학습을 이어가세요.</string>
+</resources>
