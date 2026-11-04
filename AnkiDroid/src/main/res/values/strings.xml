@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onigiri_header_eyebrow">YOUR STUDY SPACE</string>
+    <string name="onigiri_header_title">Your decks</string>
+    <string name="onigiri_header_subtitle">Choose a deck and keep your learning in motion.</string>
+</resources>
