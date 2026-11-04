@@ -1,0 +1,63 @@
+name: OnigiriDroid APK
+
+on:
+  push:
+    branches:
+      - codex/onigiri-mobile-ui
+    paths:
+      - '.github/workflows/onigiri-apk.yml'
+      - 'AnkiDroid/**'
+      - 'anki-common/**'
+      - 'api/**'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
+      - 'gradle/**'
+      - 'gradle.properties'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: onigiri-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build installable APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      CI: "true"
+      MINIFY_ENABLED: "false"
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Java 21
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: jetbrains
+          java-version: "21"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+        with:
+          cache-provider: basic
+
+      - name: Build OnigiriDroid
+        run: >-
+          ./gradlew :AnkiDroid:assembleFullRelease
+          -Duniversal-apk=true
+          -PcustomSuffix=onigiri
+          -PcustomName=OnigiriDroid
+          --no-daemon
+          --stacktrace
+
+      - name: Upload APK
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: OnigiriDroid-universal-apk
+          path: AnkiDroid/build/outputs/apk/full/release/*.apk
+          if-no-files-found: error
+          retention-days: 14
