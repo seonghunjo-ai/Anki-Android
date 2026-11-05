@@ -68,6 +68,90 @@
                             android:text="@string/onigiri_header_subtitle"
                             android:textColor="?attr/colorOnSurfaceVariant"
                             android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:id="@+id/onigiri_today_card"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:orientation="vertical"
+                            android:padding="16dp"
+                            android:background="@drawable/onigiri_today_card_background">
+
+                            <com.ichi2.ui.FixedTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/onigiri_today_eyebrow"
+                                android:textColor="?attr/colorPrimary"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.12" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.8"
+                                    android:orientation="vertical">
+
+                                    <com.ichi2.ui.FixedTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/onigiri_due_label"
+                                        android:textColor="?attr/colorOnSurfaceVariant"
+                                        android:textSize="12sp" />
+
+                                    <com.ichi2.ui.FixedTextView
+                                        android:id="@+id/onigiri_due_count"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:text="—"
+                                        android:textColor="?attr/colorOnSurface"
+                                        android:textSize="32sp"
+                                        android:textStyle="bold"
+                                        android:fontFamily="sans-serif" />
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="44dp"
+                                    android:layout_marginStart="14dp"
+                                    android:layout_marginEnd="14dp"
+                                    android:background="?attr/colorOutlineVariant" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.2"
+                                    android:orientation="vertical">
+
+                                    <com.ichi2.ui.FixedTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/onigiri_studied_label"
+                                        android:textColor="?attr/colorOnSurfaceVariant"
+                                        android:textSize="12sp" />
+
+                                    <com.ichi2.ui.FixedTextView
+                                        android:id="@+id/onigiri_studied_today"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:text="@string/onigiri_studied_placeholder"
+                                        android:textColor="?attr/colorOnSurface"
+                                        android:textSize="13sp"
+                                        android:maxLines="3"
+                                        android:ellipsize="end" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
 
                     <FrameLayout
