@@ -821,13 +821,7 @@ open class DeckPicker :
         val calendarView = OnigiriStudyCalendarView(this)
         val dialog =
             AlertDialog.Builder(this)
-                .setView(
-                    calendarView,
-                    20.dp.toPx(this),
-                    12.dp.toPx(this),
-                    20.dp.toPx(this),
-                    8.dp.toPx(this),
-                )
+                .setView(calendarView)
                 .setNegativeButton(R.string.onigiri_calendar_close, null)
                 .create()
 
