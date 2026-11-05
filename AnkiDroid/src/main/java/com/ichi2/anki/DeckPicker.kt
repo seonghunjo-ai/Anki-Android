@@ -853,6 +853,8 @@ open class DeckPicker :
 
         fun onStudiedTodayChanged(studiedToday: String) {
             deckPickerBinding.reviewSummaryTextView.text = studiedToday
+            deckPickerBinding.onigiriStudiedToday.text =
+                studiedToday.ifBlank { getString(R.string.onigiri_studied_placeholder) }
         }
 
         fun onCollectionStatusChanged(isInInitialState: Boolean) {
@@ -900,9 +902,11 @@ open class DeckPicker :
 
         fun onCardsDueChanged(dueCount: Int?) {
             if (dueCount == null) {
+                deckPickerBinding.onigiriDueCount.text = "—"
                 supportActionBar?.subtitle = null
                 return
             }
+            deckPickerBinding.onigiriDueCount.text = dueCount.toString()
 
             supportActionBar?.apply {
                 subtitle = if (dueCount == 0) null else resources.getQuantityString(CommonPlurals.widget_cards_due, dueCount, dueCount)
