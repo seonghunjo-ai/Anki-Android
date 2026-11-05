@@ -207,6 +207,7 @@ import com.ichi2.anki.utils.ext.setFragmentResultListener
 import com.ichi2.anki.utils.ext.setImageDrawableSafe
 import com.ichi2.anki.utils.ext.showDialogFragment
 import com.ichi2.anki.widgets.DeckAdapter
+import com.ichi2.anki.widgets.OnigiriStudyCalendarView
 import com.ichi2.anki.widgets.DeckHierarchyLinesDecoration
 import com.ichi2.anki.worker.SyncMediaWorker
 import com.ichi2.anki.worker.SyncWorker
@@ -531,6 +532,7 @@ open class DeckPicker :
         }
 
         setViewBinding(binding)
+        deckPickerBinding.onigiriCalendarOpen.setOnClickListener { showOnigiriCalendar() }
         if (!fragmented) {
             // On recreation into this single-pane layout (e.g. a foldable changing form
             // factor), saved state can still hold the split-pane's side panel fragment.
@@ -813,6 +815,54 @@ open class DeckPicker :
         deckPickerBinding.decks.doOnScrolled { _, _ ->
             pullToSyncWrapper.isEnabled = decksLayoutManager.findFirstCompletelyVisibleItemPosition() == 0
         }
+    }
+
+    private fun showOnigiriCalendar() {
+        val calendarView = OnigiriStudyCalendarView(this)
+        val dialog =
+            AlertDialog.Builder(this)
+                .setView(
+                    calendarView,
+                    20.dp.toPx(this),
+                    12.dp.toPx(this),
+                    20.dp.toPx(this),
+                    8.dp.toPx(this),
+                )
+                .setNegativeButton(R.string.onigiri_calendar_close, null)
+                .create()
+
+        calendarView.setOnMonthRangeRequestedListener { startMillis, endMillis ->
+            lifecycleScope.launch {
+                try {
+                    val counts =
+                        withCol {
+                            val reviewCounts = linkedMapOf<String, Int>()
+                            val query = """
+                                SELECT
+                                    strftime('%Y-%m-%d', id / 1000, 'unixepoch', 'localtime') AS review_date,
+                                    COUNT(*) AS review_count
+                                FROM revlog
+                                WHERE id >= ? AND id < ?
+                                GROUP BY review_date
+                                ORDER BY review_date
+                            """.trimIndent()
+                            db.query(query, startMillis, endMillis).use { cursor ->
+                                while (cursor.moveToNext()) {
+                                    val date = cursor.getString(0) ?: continue
+                                    reviewCounts[date] = cursor.getInt(1)
+                                }
+                            }
+                            reviewCounts
+                        }
+                    if (!isFinishing && !isDestroyed) {
+                        calendarView.setReviewCounts(counts)
+                    }
+                } catch (error: Exception) {
+                    Timber.w(error, "Could not load Onigiri study calendar")
+                }
+            }
+        }
+        dialog.show()
     }
 
     @Suppress("UNUSED_PARAMETER")
