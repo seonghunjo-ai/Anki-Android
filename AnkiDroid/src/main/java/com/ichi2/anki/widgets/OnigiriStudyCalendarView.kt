@@ -12,6 +12,7 @@ import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.ichi2.anki.R
+import com.ichi2.anki.common.time.TimeManager
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -24,7 +25,7 @@ import java.util.Locale
 class OnigiriStudyCalendarView(
     context: Context,
 ) : LinearLayout(context) {
-    private val month = Calendar.getInstance().apply {
+    private val month = TimeManager.time.calendar().apply {
         set(Calendar.DAY_OF_MONTH, 1)
         set(Calendar.HOUR_OF_DAY, 0)
         set(Calendar.MINUTE, 0)
@@ -33,7 +34,7 @@ class OnigiriStudyCalendarView(
     }
 
     private var reviewCounts: Map<String, Int> = emptyMap()
-    private var selectedDateKey: String? = dateKey(Calendar.getInstance())
+    private var selectedDateKey: String? = dateKey(TimeManager.time.calendar())
     private var onMonthRangeRequested: ((Long, Long) -> Unit)? = null
 
     private val monthLabel = TextView(context)
@@ -311,15 +312,17 @@ class OnigiriStudyCalendarView(
         row: Int,
         column: Int,
         height: Int,
-    ): GridLayout.LayoutParams =
-        GridLayout.LayoutParams(
-            GridLayout.spec(row),
-            GridLayout.spec(column, 1f),
-        ).apply {
-            width = 0
-            this.height = height
-            setMargins(2.dp(), 2.dp(), 2.dp(), 2.dp())
-        }
+    ): GridLayout.LayoutParams {
+        val layoutParams =
+            GridLayout.LayoutParams(
+                GridLayout.spec(row),
+                GridLayout.spec(column, 1f),
+            )
+        layoutParams.width = 0
+        layoutParams.height = height
+        layoutParams.setMargins(2.dp(), 2.dp(), 2.dp(), 2.dp())
+        return layoutParams
+    }
 
     private fun dateKey(calendar: Calendar): String =
         SimpleDateFormat("yyyy-MM-dd", Locale.US).format(calendar.time)
