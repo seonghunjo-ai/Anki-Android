@@ -11,4 +11,15 @@
     <color name="onigiri_count_new_surface">#20372A</color>
     <color name="onigiri_count_learn_surface">#40301C</color>
     <color name="onigiri_count_review_surface">#1D304A</color>
+
+    <color name="onigiri_calendar_sheet">#202631</color>
+    <color name="onigiri_calendar_text">#E8EDF5</color>
+    <color name="onigiri_calendar_subtle">#A2AEC0</color>
+    <color name="onigiri_calendar_accent">#77BFFF</color>
+    <color name="onigiri_calendar_selected">#24425C</color>
+    <color name="onigiri_calendar_level_1">#294336</color>
+    <color name="onigiri_calendar_level_2">#315E43</color>
+    <color name="onigiri_calendar_level_3">#397A53</color>
+    <color name="onigiri_calendar_level_4">#50A86F</color>
+
 </resources>
