@@ -1,4 +1,5 @@
 name: OnigiriDroid APK
+# Rebuild when the study calendar implementation is updated.
 
 on:
   push:
