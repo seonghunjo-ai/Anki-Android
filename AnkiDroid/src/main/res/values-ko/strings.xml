@@ -8,4 +8,16 @@
     <string name="onigiri_due_placeholder">—</string>
     <string name="onigiri_studied_label">오늘 학습</string>
     <string name="onigiri_studied_placeholder">학습 요약을 불러오는 중입니다.</string>
+
+    <string name="onigiri_calendar_open">학습 캘린더 보기  ›</string>
+    <string name="onigiri_calendar_eyebrow">학습 캘린더</string>
+    <string name="onigiri_calendar_previous_month">이전 달</string>
+    <string name="onigiri_calendar_next_month">다음 달</string>
+    <string name="onigiri_calendar_month_summary">이번 달 %1$d일 학습 · %2$d회 복습</string>
+    <string name="onigiri_calendar_selected_summary">%1$s · %2$d회 복습</string>
+    <string name="onigiri_calendar_no_reviews">%1$s · 학습 기록 없음</string>
+    <string name="onigiri_calendar_select_day">날짜를 선택하면 학습 기록을 확인할 수 있습니다.</string>
+    <string name="onigiri_calendar_day_accessibility">%1$d일, 복습 %2$d회</string>
+    <string name="onigiri_calendar_close">닫기</string>
+
 </resources>
