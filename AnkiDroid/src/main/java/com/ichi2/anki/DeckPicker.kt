@@ -819,11 +819,10 @@ open class DeckPicker :
 
     private fun showOnigiriCalendar() {
         val calendarView = OnigiriStudyCalendarView(this)
-        val dialog =
-            AlertDialog.Builder(this)
-                .setView(calendarView)
-                .setNegativeButton(R.string.onigiri_calendar_close, null)
-                .create()
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setView(calendarView)
+        dialogBuilder.setNegativeButton(R.string.onigiri_calendar_close, null)
+        val dialog = dialogBuilder.create()
 
         calendarView.setOnMonthRangeRequestedListener { startMillis, endMillis ->
             lifecycleScope.launch {
@@ -831,7 +830,8 @@ open class DeckPicker :
                     val counts =
                         withCol {
                             val reviewCounts = linkedMapOf<String, Int>()
-                            val query = """
+                            val query =
+                                """
                                 SELECT
                                     strftime('%Y-%m-%d', id / 1000, 'unixepoch', 'localtime') AS review_date,
                                     COUNT(*) AS review_count
@@ -839,7 +839,7 @@ open class DeckPicker :
                                 WHERE id >= ? AND id < ?
                                 GROUP BY review_date
                                 ORDER BY review_date
-                            """.trimIndent()
+                                """.trimIndent()
                             db.query(query, startMillis, endMillis).use { cursor ->
                                 while (cursor.moveToNext()) {
                                     val date = cursor.getString(0) ?: continue
