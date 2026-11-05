@@ -8,4 +8,16 @@
     <string name="onigiri_due_placeholder">—</string>
     <string name="onigiri_studied_label">Studied today</string>
     <string name="onigiri_studied_placeholder">Your study summary will appear here.</string>
+
+    <string name="onigiri_calendar_open">View study calendar  ›</string>
+    <string name="onigiri_calendar_eyebrow">STUDY CALENDAR</string>
+    <string name="onigiri_calendar_previous_month">Previous month</string>
+    <string name="onigiri_calendar_next_month">Next month</string>
+    <string name="onigiri_calendar_month_summary">Studied on %1$d days · %2$d reviews</string>
+    <string name="onigiri_calendar_selected_summary">%1$s · %2$d reviews</string>
+    <string name="onigiri_calendar_no_reviews">%1$s · No reviews recorded</string>
+    <string name="onigiri_calendar_select_day">Select a date to see its study record.</string>
+    <string name="onigiri_calendar_day_accessibility">%1$d, %2$d reviews</string>
+    <string name="onigiri_calendar_close">Close</string>
+
 </resources>
