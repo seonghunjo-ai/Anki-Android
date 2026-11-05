@@ -3,4 +3,8 @@
     <string name="onigiri_header_eyebrow">나의 학습 공간</string>
     <string name="onigiri_header_title">나의 덱</string>
     <string name="onigiri_header_subtitle">덱을 선택해 오늘의 학습을 이어가세요.</string>
+    <string name="onigiri_today_eyebrow">오늘의 학습 현황</string>
+    <string name="onigiri_due_label">복습할 카드</string>
+    <string name="onigiri_studied_label">오늘 학습</string>
+    <string name="onigiri_studied_placeholder">학습 요약을 불러오는 중입니다.</string>
 </resources>
