@@ -5,6 +5,7 @@
     <string name="onigiri_header_subtitle">Choose a deck and keep your learning in motion.</string>
     <string name="onigiri_today_eyebrow">TODAY AT A GLANCE</string>
     <string name="onigiri_due_label">Cards due</string>
+    <string name="onigiri_due_placeholder">—</string>
     <string name="onigiri_studied_label">Studied today</string>
     <string name="onigiri_studied_placeholder">Your study summary will appear here.</string>
 </resources>

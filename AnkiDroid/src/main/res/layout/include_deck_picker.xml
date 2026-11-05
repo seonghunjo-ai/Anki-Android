@@ -112,7 +112,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="2dp"
-                                        android:text="—"
+                                        android:text="@string/onigiri_due_placeholder"
                                         android:textColor="?attr/colorOnSurface"
                                         android:textSize="32sp"
                                         android:textStyle="bold"

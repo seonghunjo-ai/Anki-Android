@@ -902,7 +902,7 @@ open class DeckPicker :
 
         fun onCardsDueChanged(dueCount: Int?) {
             if (dueCount == null) {
-                deckPickerBinding.onigiriDueCount.text = "—"
+                deckPickerBinding.onigiriDueCount.text = getString(R.string.onigiri_due_placeholder)
                 supportActionBar?.subtitle = null
                 return
             }
